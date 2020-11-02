@@ -12,13 +12,10 @@ interface RunOptions {
 
 export const run = async (cmd: string[], opts?: RunOptions) => {
   const p = Deno.run({ ...opts, cmd });
-  const result: {
-    status: Deno.ProcessStatus;
+  const result: Deno.ProcessStatus & {
     stderr?: string;
     stdout?: string;
-  } = {
-    status: await p.status(),
-  };
+  } = await p.status();
   if (opts?.stderr === "piped") {
     result.stderr = new TextDecoder().decode(await p.stderrOutput());
   }

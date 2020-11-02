@@ -6,7 +6,7 @@ import * as subprocess from "./mod.ts";
 
 Deno.test("run()", async () => {
   const r = await subprocess.run(["deno", "--version"]);
-  assertEquals(r, { status: { code: 0, success: true } });
+  assertEquals(r, { code: 0, success: true });
 });
 
 Deno.test("output() return stdout as string", async () => {
