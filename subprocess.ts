@@ -26,14 +26,18 @@ export const run = async (cmd: string[], opts?: RunOptions) => {
   return result;
 };
 
-export const output = (
+export const output = async (
   cmd: string[],
   opts?: RunOptions & { stdout?: "piped" },
-) =>
-  run(cmd, { stderr: "null", ...opts, stdout: "piped" }).then((o) => o.stdout!);
+) => {
+  const r = await run(cmd, { stderr: "null", ...opts, stdout: "piped" });
+  return r.stdout!;
+};
 
-export const stderrOutput = (
+export const stderrOutput = async (
   cmd: string[],
   opts?: RunOptions & { stderr?: "piped" },
-) =>
-  run(cmd, { stdout: "null", ...opts, stderr: "piped" }).then((o) => o.stderr!);
+) => {
+  const r = await run(cmd, { stdout: "null", ...opts, stderr: "piped" });
+  return r.stderr!;
+};
