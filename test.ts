@@ -4,8 +4,8 @@ import {
 } from "https://deno.land/std@0.78.0/testing/asserts.ts";
 import * as subprocess from "./mod.ts";
 
-Deno.test("run()", async () => {
-  const r = await subprocess.run(["deno", "--version"]);
+Deno.test("run() exit with 0", async () => {
+  const r = await subprocess.run(["deno", "--version"], { stdout: "null" });
   assertEquals(r, { code: 0, success: true });
 });
 
